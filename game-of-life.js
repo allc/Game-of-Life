@@ -1,10 +1,10 @@
 /*
  * configurations
  */
-var rows = 20;
-var cols = 20;
+var rows = 50;
+var cols = 50;
 
-var cellSize = 20;
+var cellSize = 10;
 
 // board width and height are calculated
 var boardWidth = rows * cellSize + 1;
@@ -27,7 +27,7 @@ var cells = [];
 
 function initiateCells() {
     for (var i = 0; i < rows * cols; i++) {
-        cells[i] = Math.random() < 0.3 ? true : false;
+        cells[i] = Math.random() < 0.15 ? true : false;
     }
 }
 
@@ -113,9 +113,16 @@ function calcIndex(row, col) {
     return row * cols + col;
 }
 
+/*
+ * simulation
+ */
 initiate();
 
+var isRunning = false;
+var runInterval;
+
 function initiate() {
+    stop();
     initiateCells();
     draw();
 }
@@ -125,11 +132,20 @@ function step() {
     draw();
 }
 
-var runInterval
+function buttonStep() {
+    if (!isRunning) {
+        step();
+    }
+}
+
 function run() {
-    runInterval= setInterval(step, 1000);
+    if (!isRunning) {
+        isRunning = true;
+        runInterval= setInterval(step, 300);
+    }
 }
 
 function stop() {
     clearInterval(runInterval);
+    isRunning = false;
 }
