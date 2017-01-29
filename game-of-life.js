@@ -90,6 +90,7 @@ function stepCell() {
  */
 function draw() {
     ctx.lineWidth = '1';
+    ctx.beginPath();
     for (var i = 0; i < rows * cols; i++) {
         if (cells[i]) {
             ctx.fillRect(calcCol(i) * cellSize + 0.5, calcRow(i) * cellSize + 0.5, cellSize, cellSize);
@@ -99,6 +100,7 @@ function draw() {
         }
     }
     ctx.stroke();
+    ctx.closePath();
 }
 
 function calcRow(i) {
